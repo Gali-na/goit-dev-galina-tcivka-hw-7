@@ -24,8 +24,11 @@ class HttpStatusImageDownloaderTest {
     }
 
     @Test
-    void downloadStatusImage_CodeExist() throws HttpURLException {
+    void downloadStatusImage_CodeExist_PositiveResult() throws HttpURLException {
         List<String> nameBeforeDownloading = getFileNamesProject();
+        if (nameBeforeDownloading.contains("picture404.jpeg")) {
+            nameBeforeDownloading.remove("picture404.jpeg");
+        }
         HttpStatusImageDownloader.downloadStatusImage(404);
         List<String> nameAfterDownloading = getFileNamesProject();
         assertNotEquals(nameBeforeDownloading.contains("picture404.jpeg"),
